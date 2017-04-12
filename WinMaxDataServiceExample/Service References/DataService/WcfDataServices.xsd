@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="WcfDataServices" elementFormDefault="qualified" targetNamespace="WcfDataServices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/WcfDataServices" />
+  <xs:import namespace="http://schemas.microsoft.com/Message" />
+  <xs:complexType name="BulkToolChangeInfoTypeBox">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Bulk">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="BulkStruct" type="q1:UnmanagedDataTypes.BulkToolChangeInfoType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BulkToolChangeInfoTypeBox" nillable="true" type="tns:BulkToolChangeInfoTypeBox" />
+  <xs:complexType name="Bulk">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="Bulk" nillable="true" type="tns:Bulk" />
+  <xs:complexType name="BulkNotificationDataTypeBox">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Bulk">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="BulkStruct" type="q2:UnmanagedDataTypes.BulkNotificationDataType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BulkNotificationDataTypeBox" nillable="true" type="tns:BulkNotificationDataTypeBox" />
+  <xs:complexType name="BulkRemoteCommandDataTypeBox">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Bulk">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="BulkStruct" type="q3:UnmanagedDataTypes.RemoteCommandInfoType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BulkRemoteCommandDataTypeBox" nillable="true" type="tns:BulkRemoteCommandDataTypeBox" />
+  <xs:complexType name="BulkMachinePosTypeBox">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Bulk">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="BulkStruct" type="q4:UnmanagedDataTypes.BulkMachinePosType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BulkMachinePosTypeBox" nillable="true" type="tns:BulkMachinePosTypeBox" />
+  <xs:complexType name="BulkToolDataTypeBox">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Bulk">
+        <xs:sequence>
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="BulkStruct" type="q5:UnmanagedDataTypes.BulkToolDataType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BulkToolDataTypeBox" nillable="true" type="tns:BulkToolDataTypeBox" />
+  <xs:complexType name="BulkPartSetupTypeBox">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Bulk">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="BulkStruct" type="q6:UnmanagedDataTypes.BulkCurrentPartSetupType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BulkPartSetupTypeBox" nillable="true" type="tns:BulkPartSetupTypeBox" />
+  <xs:element name="GetVersion">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetVersionResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServerVersion">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServerVersionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetServerVersionResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClock">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClockResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetClockResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="sv" nillable="true" type="q7:SIDValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSIDResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetIntSID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sv" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetIntSIDResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDoubleSID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sv" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDoubleSIDResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sidName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="GetSIDResult" nillable="true" type="q8:SIDValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDoubleSID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sidName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDoubleSIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDoubleSIDResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIntSID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sidName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIntSIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetIntSIDResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBulkByXML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sidName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBulkByXMLResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetBulkByXMLResult" nillable="true">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any minOccurs="0" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBulk">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="tns:GetBulkParams" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="GetBulkParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetBulkParams" nillable="true" type="tns:GetBulkParams" />
+  <xs:element name="GetBulkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetBulkResult" nillable="true" type="tns:BulkWrapper" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="BulkWrapper">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bulk" nillable="true" type="tns:Bulk" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BulkWrapper" nillable="true" type="tns:BulkWrapper" />
+  <xs:element name="SetBulk">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="tns:SetBulkParams" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SetBulkParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="tns:BulkWrapper" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetBulkParams" nillable="true" type="tns:SetBulkParams" />
+  <xs:element name="SetBulkResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChangedBulkByXML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="sv" nillable="true" type="q9:SIDValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChangedBulkByXMLResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetChangedBulkByXMLResult" nillable="true">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any minOccurs="0" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Subscribe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sidName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Unsubscribe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sidName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChangedSIDs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="stringSIDs" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChangedSIDsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetChangedSIDsResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChangedSIDValues">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="values" nillable="true" type="q10:ArrayOfSIDValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChangedSIDValuesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="GetChangedSIDValuesResult" nillable="true" type="q11:ArrayOfSIDValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoteRapidMove">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="rrmd" nillable="true" type="q12:RemoteRapidMoveData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoteRapidMoveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoteRapidMoveResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WirelessJog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WcfDataServices" minOccurs="0" name="wjd" nillable="true" type="q13:WirelessJogData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WirelessJogResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="WirelessJogResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcessCommandRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sbm" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcessCommandRequestResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DownloadFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DownloadFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.microsoft.com/Message" name="DownloadFileResult" type="q14:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentGraphicsProgram">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentGraphicsProgramResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.microsoft.com/Message" name="GetCurrentGraphicsProgramResult" type="q15:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StringToGID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SIDname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StringToGIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="StringToGIDResult" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

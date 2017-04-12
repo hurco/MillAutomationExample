@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="WcfDataServices" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="WcfDataServices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="WcfDataServices/Imports">
+      <xsd:import namespace="WcfDataServices" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WcfDataServices" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.microsoft.com/Message" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataService_GetVersion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetVersion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetServerVersion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServerVersion" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetServerVersion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServerVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetClock_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClock" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetClock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetIntSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetIntSID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetIntSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetIntSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetDoubleSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDoubleSID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetDoubleSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDoubleSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetDoubleSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDoubleSID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetDoubleSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDoubleSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetIntSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIntSID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetIntSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIntSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetBulkByXML_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBulkByXML" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetBulkByXML_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBulkByXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetBulk_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBulk" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetBulk_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetBulk_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetBulk" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetBulk_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetChangedBulkByXML_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangedBulkByXML" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetChangedBulkByXML_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangedBulkByXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_Subscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_Unsubscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_Unsubscribe_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetChangedSIDs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangedSIDs" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetChangedSIDs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangedSIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetChangedSIDValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangedSIDValues" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetChangedSIDValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangedSIDValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_RemoteRapidMove_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoteRapidMove" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_RemoteRapidMove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoteRapidMoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_WirelessJog_InputMessage">
+    <wsdl:part name="parameters" element="tns:WirelessJog" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_WirelessJog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WirelessJogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ProcessCommandRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessCommandRequest" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ProcessCommandRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProcessCommandRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_DownloadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFile" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_DownloadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetCurrentGraphicsProgram_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentGraphicsProgram" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetCurrentGraphicsProgram_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentGraphicsProgramResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_StringToGID_InputMessage">
+    <wsdl:part name="parameters" element="tns:StringToGID" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_StringToGID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StringToGIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDataService">
+    <wsdl:operation name="GetVersion">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetVersion" message="tns:IDataService_GetVersion_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetVersionResponse" message="tns:IDataService_GetVersion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerVersion">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetServerVersion" message="tns:IDataService_GetServerVersion_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetServerVersionResponse" message="tns:IDataService_GetServerVersion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClock">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetClock" message="tns:IDataService_GetClock_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetClockResponse" message="tns:IDataService_GetClock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/SetSID" message="tns:IDataService_SetSID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/SetSIDResponse" message="tns:IDataService_SetSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIntSID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/SetIntSID" message="tns:IDataService_SetIntSID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/SetIntSIDResponse" message="tns:IDataService_SetIntSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDoubleSID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/SetDoubleSID" message="tns:IDataService_SetDoubleSID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/SetDoubleSIDResponse" message="tns:IDataService_SetDoubleSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetSID" message="tns:IDataService_GetSID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetSIDResponse" message="tns:IDataService_GetSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoubleSID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetDoubleSID" message="tns:IDataService_GetDoubleSID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetDoubleSIDResponse" message="tns:IDataService_GetDoubleSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIntSID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetIntSID" message="tns:IDataService_GetIntSID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetIntSIDResponse" message="tns:IDataService_GetIntSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkByXML">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetBulkByXML" message="tns:IDataService_GetBulkByXML_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetBulkByXMLResponse" message="tns:IDataService_GetBulkByXML_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetBulk" message="tns:IDataService_GetBulk_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetBulkResponse" message="tns:IDataService_GetBulk_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBulk">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/SetBulk" message="tns:IDataService_SetBulk_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/SetBulkResponse" message="tns:IDataService_SetBulk_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChangedBulkByXML">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetChangedBulkByXML" message="tns:IDataService_GetChangedBulkByXML_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetChangedBulkByXMLResponse" message="tns:IDataService_GetChangedBulkByXML_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/Subscribe" message="tns:IDataService_Subscribe_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/SubscribeResponse" message="tns:IDataService_Subscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Unsubscribe">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/Unsubscribe" message="tns:IDataService_Unsubscribe_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/UnsubscribeResponse" message="tns:IDataService_Unsubscribe_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChangedSIDs">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetChangedSIDs" message="tns:IDataService_GetChangedSIDs_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetChangedSIDsResponse" message="tns:IDataService_GetChangedSIDs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChangedSIDValues">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetChangedSIDValues" message="tns:IDataService_GetChangedSIDValues_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetChangedSIDValuesResponse" message="tns:IDataService_GetChangedSIDValues_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoteRapidMove">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/RemoteRapidMove" message="tns:IDataService_RemoteRapidMove_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/RemoteRapidMoveResponse" message="tns:IDataService_RemoteRapidMove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WirelessJog">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/WirelessJog" message="tns:IDataService_WirelessJog_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/WirelessJogResponse" message="tns:IDataService_WirelessJog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessCommandRequest">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/ProcessCommandRequest" message="tns:IDataService_ProcessCommandRequest_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/ProcessCommandRequestResponse" message="tns:IDataService_ProcessCommandRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/DownloadFile" message="tns:IDataService_DownloadFile_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/DownloadFileResponse" message="tns:IDataService_DownloadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentGraphicsProgram">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/GetCurrentGraphicsProgram" message="tns:IDataService_GetCurrentGraphicsProgram_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/GetCurrentGraphicsProgramResponse" message="tns:IDataService_GetCurrentGraphicsProgram_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StringToGID">
+      <wsdl:input wsaw:Action="WcfDataServices/IDataService/StringToGID" message="tns:IDataService_StringToGID_InputMessage" />
+      <wsdl:output wsaw:Action="WcfDataServices/IDataService/StringToGIDResponse" message="tns:IDataService_StringToGID_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
