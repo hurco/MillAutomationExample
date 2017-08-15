@@ -1,0 +1,321 @@
+<OptionFile>
+  <Mill>
+    <Regular>
+      <Category>
+        <Name>Mill System</Name>
+        <Option>007-4227-380 Mill Machine System</Option>
+      </Category>
+      <Category>
+        <Name>Mill Options</Name>
+        <Option>007-4227-040 Machine Advanced Verification Graphics</Option>
+        <Option>007-4227-050 Machine DXF</Option>
+        <Option>007-4227-070 Machine NCPP</Option>
+        <Option>007-4227-080 Machine ISNC</Option>
+        <Option>007-4227-090 Machine Tool Probe</Option>
+        <Option>007-4227-110 Machine Part Probe</Option>
+        <Option>007-4227-120 Machine Ultipockets</Option>
+        <Option>007-4227-130 Machine Insert Pockets</Option>
+        <Option>007-4227-140 Machine Rigid Tap</Option>
+        <Option>007-4227-150 Machine Ramp Entry</Option>
+        <Option>007-4227-160 Machine 3D Mold</Option>
+        <Option>007-4227-170 Machine NC Conversational Merge</Option>
+        <Option>007-4227-180 Machine Tool Change Optimization</Option>
+        <Option>007-4227-190 Machine Swept Surface</Option>
+        <Option>007-4227-220 Machine TPS</Option>
+        <Option>007-4227-230 Machine SelectSurface Finish Quality</Option>
+        <Option>007-4227-240 Machine Tool &amp; Material Library</Option>
+        <Option>007-4227-250 Machine Simultaneous 5 Axis</Option>
+        <Option>007-4227-270 Machine UltiMotion</Option>
+        <Option>007-4227-390 Machine UltiMonitor</Option>
+        <Option>007-4227-400 Machine Remote Data Read</Option>
+        <Option>007-4227-410 Machine Remote Data Write</Option>
+        <Option>007-4227-420 Machine Remote Data Advanced</Option>
+        <Option>007-4227-440 Machine Stream Load</Option>
+        <Option>007-4227-450 Machine Job List</Option>
+        <!-- Do not reuse 460 - Formerly used by AdaptiPath during test period and installed by some customers. -->
+        <Option>007-4227-470 Machine Centerline Probing</Option>
+        <Option>007-4227-480 Machine Linear Thermal Compensation</Option>
+        <!-- 490 reserved for 3D Printing System Option - N/A for this configuration. -->
+        <Option>007-4227-500 Machine 3D Print Export</Option>
+        <Option>007-4227-510 Machine MaxUI</Option>
+        <Option>007-4227-520 Machine Assigned ATC Pockets</Option>
+        <Option>007-4227-530 Machine Honing</Option>
+	<Option>007-4227-540 Machine Aux Tool Changer</Option>
+      </Category>
+      <Category>
+        <Name>Internal Options</Name>
+        <Option>007-4227-381 Mill Machine System (Permanent)</Option>
+        <Option>007-4227-041 Machine Advanced Verification Graphics (Permanent)</Option>
+        <Option>007-4227-051 Machine DXF (Permanent)</Option>
+        <Option>007-4227-071 Machine NCPP (Permanent)</Option>
+        <Option>007-4227-081 Machine ISNC (Permanent)</Option>
+        <Option>007-4227-091 Machine Tool Probe (Permanent)</Option>
+        <Option>007-4227-111 Machine Part Probe (Permanent)</Option>
+        <Option>007-4227-121 Machine Ultipockets (Permanent)</Option>
+        <Option>007-4227-131 Machine Insert Pockets (Permanent)</Option>
+        <Option>007-4227-141 Machine Rigid Tap (Permanent)</Option>
+        <Option>007-4227-151 Machine Ramp Entry (Permanent)</Option>
+        <Option>007-4227-161 Machine 3D Mold (Permanent)</Option>
+        <Option>007-4227-171 Machine NC Conversational Merge (Permanent)</Option>
+        <Option>007-4227-181 Machine Tool Change Optimization (Permanent)</Option>
+        <Option>007-4227-191 Machine Swept Surface (Permanent)</Option>
+        <Option>007-4227-221 Machine TPS (Permanent)</Option>
+        <Option>007-4227-231 Machine SelectSurface Finish Quality (Permanent)</Option>
+        <Option>007-4227-241 Machine Tool &amp; Material Library (Permanent)</Option>
+        <Option>007-4227-251 Machine Simultaneous 5 Axis (Permanent)</Option>
+        <Option>007-4227-271 Machine UltiMotion (Permanent)</Option>
+        <Option>007-4227-391 Machine UltiMonitor (Permanent)</Option>
+        <Option>007-4227-401 Machine Remote Data Read (Permanent)</Option>
+        <Option>007-4227-411 Machine Remote Data Write (Permanent)</Option>
+        <Option>007-4227-421 Machine Remote Data Advanced (Permanent)</Option>
+        <Option>007-4227-431 Machine Labs  (Permanent)</Option>
+        <Option>007-4227-441 Machine Stream Load  (Permanent)</Option>
+        <Option>007-4227-451 Machine Job List (Permanent)</Option>
+        <Option>007-4227-471 Machine Centerline Probing (Permanent)</Option>
+        <Option>007-4227-481 Machine Linear Thermal Compensation (Permanent)</Option>
+        <Option>007-4227-501 Machine 3D Print Export (Permanent)</Option>
+        <Option>007-4227-511 Machine MaxUI (Permanent)</Option>
+        <Option>007-4227-521 Machine Assigned ATC Pockets (Permanent)</Option>
+	      <Option>007-4227-531 Machine Honing (Permanent)</Option>
+        <Option>007-4227-541 Machine Aux Tool Changer (Permanent)</Option>
+      </Category>
+    </Regular>
+    <Timed>
+      <Option>
+        <Name>Mill System</Name>
+        <Variation>
+          <Name>007-4227-385 Mill Machine System (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Advanced Verification Graphics</Name>
+        <Variation>
+          <Name>007-4227-045 Machine Advanced Verification Graphics (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine DXF</Name>
+        <Variation>
+          <Name>007-4227-055 Machine DXF (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine NCPP</Name>
+        <Variation>
+          <Name>007-4227-075 Machine NCPP (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine ISNC</Name>
+        <Variation>
+          <Name>007-4227-085 Machine ISNC (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Tool Probe</Name>
+        <Variation>
+          <Name>007-4227-095 Machine Tool Probe (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Part Probe</Name>
+        <Variation>
+          <Name>007-4227-115 Machine Part Probe (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Ultipockets</Name>
+        <Variation>
+          <Name>007-4227-125 Machine Ultipockets (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Insert Pockets</Name>
+        <Variation>
+          <Name>007-4227-135 Machine Insert Pockets (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Rigid Tap</Name>
+        <Variation>
+          <Name>007-4227-145 Machine Rigid Tap (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Ramp Entry</Name>
+        <Variation>
+          <Name>007-4227-155 Machine Ramp Entry (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine 3D Mold</Name>
+        <Variation>
+          <Name>007-4227-165 Machine 3D Mold (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine NC Conversational Merge</Name>
+        <Variation>
+          <Name>007-4227-175 Machine NC Conversational Merge (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Tool Change Optimization</Name>
+        <Variation>
+          <Name>007-4227-185 Machine Tool Change Optimization (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Swept Surface</Name>
+        <Variation>
+          <Name>007-4227-195 Machine Swept Surface (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine SelectSurface Finish Quality</Name>
+        <Variation>
+          <Name>007-4227-235 Machine SelectSurface Finish Quality (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Tool &amp; Material Library</Name>
+        <Variation>
+          <Name>007-4227-245 Machine Tool &amp; Material Library (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Simultaneous 5 Axis</Name>
+        <Variation>
+          <Name>007-4227-255 Simultaneous 5 Axis (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine UltiMotion</Name>
+        <Variation>
+          <Name>007-4227-275 UltiMotion (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine UltiMonitor</Name>
+        <Variation>
+          <Name>007-4227-395 UltiMonitor (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Remote Data Read</Name>
+        <Variation>
+          <Name>007-4227-405 Machine Remote Data Read (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Remote Data Write</Name>
+        <Variation>
+          <Name>007-4227-415 Machine Remote Data Write (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Remote Data Advanced</Name>
+        <Variation>
+          <Name>007-4227-425 Machine Remote Data Advanced (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Labs</Name>
+        <Variation>
+          <Name>007-4227-433 Labs (180 Days)</Name>
+          <Days>180</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Stream Load</Name>
+        <Variation>
+          <Name>007-4227-445 Stream Load (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Job List</Name>
+        <Variation>
+          <Name>007-4227-455 Job List (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Centerline Probing</Name>
+        <Variation>
+          <Name>007-4227-475 Centerline Probing (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine Linear Compensation</Name>
+        <Variation>
+          <Name>007-4227-485 Linear Thermal Compensation (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine 3D Print Export</Name>
+        <Variation>
+          <Name>007-4227-505 3D Print Export (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+      <Option>
+        <Name>Machine MaxUI</Name>
+        <Variation>
+          <Name>007-4227-515 MaxUI (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+
+      <Option>
+        <Name>Machine Assigned ATC Pockets</Name>
+        <Variation>
+          <Name>007-4227-525 Assigned ATC Pockets (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+
+      <Option>
+        <Name>Machine Honing</Name>
+        <Variation>
+          <Name>007-4227-535 Honing (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+
+      <Option>
+        <Name>Machine Aux Tool Changer</Name>
+        <Variation>
+          <Name>007-4227-545 Aux Tool Changer (30 Days)</Name>
+          <Days>30</Days>
+        </Variation>
+      </Option>
+
+    </Timed>
+  </Mill>
+</OptionFile>
