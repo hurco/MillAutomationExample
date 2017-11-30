@@ -105,7 +105,7 @@ namespace WinMaxDataServiceExample
                 return;
             }
 
-            Client = new RestClient(ipAddress.ToString(), "0018", "dPS2hFkS43WSQ+nJSI7yjpd9+/nUFKUhycmKj+/i/Ng0cZmO+/e/64msLan5Ld9K8/PJttdhehtbZKKx7F3Kaw=="); //create local service
+            Client = new RestClient(ipAddress.ToString(), "VendorID", "Password"); //create local service
             Client.SidUpdated += this.OnNotificationReceived;
             ab = false;
            
