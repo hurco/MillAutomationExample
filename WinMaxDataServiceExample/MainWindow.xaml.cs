@@ -177,7 +177,7 @@ namespace WinMaxDataServiceExample
               double.TryParse(eventArgs.Value, out val);
               if (val > 1 && val <3) //completed success
               {
-                  Dispatcher.BeginInvoke(new Action(() => {  LoadProgram(this, null); }));
+                  Dispatcher.BeginInvoke(new Action(() => {  Thread.Sleep(1000); LoadProgram(this, null); }));
               }
           }
           else if (eventArgs.Sid == SidConstants.SID.SID_RT_WAITING_ON_REMOTE_PROGRAM_START)
@@ -187,7 +187,7 @@ namespace WinMaxDataServiceExample
               //if (val > 3 && val < 5) // auto_prep
               {
 
-                  Dispatcher.BeginInvoke(new Action(() => {  StartCycle(this, null); }));
+                  Dispatcher.BeginInvoke(new Action(() => { Thread.Sleep(1000); StartCycle(this, null); }));
               }
           }   
           else
@@ -241,7 +241,7 @@ namespace WinMaxDataServiceExample
 
         private void StartCycle(object sender, EventArgs e)
         {
-            Client.SetSID("SID_RT_START_CYCLE_BUTTON", 1);
+            Client.SetSID("SID_RT_START_CYCLE_BUTTON", 1.0);
         }
         private void LoadProgram(object sender, EventArgs e)
         {
