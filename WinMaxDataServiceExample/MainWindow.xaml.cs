@@ -136,15 +136,16 @@ namespace WinMaxDataServiceExample
           ///turn on security
 
         
-          notificationServiceClient.ClientCredentials.UserName.UserName = "id"; // your VendorID (1234)
-          notificationServiceClient.ClientCredentials.UserName.Password = "password";
+          notificationServiceClient.ClientCredentials.UserName.UserName = "VendorID"; // your VendorID (1234)
+          notificationServiceClient.ClientCredentials.UserName.Password = "Password";
 
-          dataservice.ClientCredentials.UserName.UserName = "id"; // your VendorID (1234)
-          dataservice.ClientCredentials.UserName.Password = "password";
-          HeartbeatTimer = new Timer(PingWinmax, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+          dataservice.ClientCredentials.UserName.UserName = "VendorID"; // your VendorID (1234)
+          dataservice.ClientCredentials.UserName.Password = "Password";
+         // HeartbeatTimer = new Timer(PingWinmax, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
           try
           {
             notificationServiceClient.Open();
+            dataservice.Open();
           }
           catch (Exception e)
           {
@@ -206,7 +207,7 @@ namespace WinMaxDataServiceExample
               double.TryParse(eventArgs.Value, out val);
               if (val > 1 && val <3) //completed success
               {
-                  Dispatcher.BeginInvoke(new Action(() => {  LoadProgram(this, null); }));
+                  Dispatcher.BeginInvoke(new Action(() => { Thread.Sleep(1000); LoadProgram(this, null); }));
               }
           }
           else if (eventArgs.Sid == SidConstants.SID.SID_RT_WAITING_ON_REMOTE_PROGRAM_START)
@@ -216,7 +217,7 @@ namespace WinMaxDataServiceExample
               //if (val > 3 && val < 5) // auto_prep
               {
 
-                  Dispatcher.BeginInvoke(new Action(() => {  StartCycle(this, null); }));
+                  Dispatcher.BeginInvoke(new Action(() => { Thread.Sleep(1000); StartCycle(this, null); }));
               }
           }   
           else
@@ -267,6 +268,7 @@ namespace WinMaxDataServiceExample
                 }
             }
         }
+        int count = 0;
 
         private void StartCycle(object sender, EventArgs e)
         {
@@ -286,16 +288,20 @@ namespace WinMaxDataServiceExample
 
             rcrdata.dValue[0] = 0;
             rcrdata.dValue[1] = 1;
-            rcrdata.dValue[2] = 0;
-            if (ab)
+            rcrdata.dValue[2] = 1;
+            if (ab && count >1)
             {
+                count = 0;
                 byte[] pathdata = Encoding.ASCII.GetBytes(Program2.Text);
                 Array.Copy(pathdata, 0, rcrdata.sValue, 0, Math.Min(200, pathdata.Length));
+                ab = false;
             }
             else
             {
+                count++;
                 byte[] pathdata = Encoding.ASCII.GetBytes(Program.Text);
                 Array.Copy(pathdata, 0, rcrdata.sValue, 0, Math.Min(200, pathdata.Length));
+                ab = true;
             }
            // Array.Copy(pathdata, 0, rcrdata.sValue, 0, Math.Min(200,pathdata.Length));
             rcrdatabox.BulkStruct = rcrdata;
@@ -303,7 +309,7 @@ namespace WinMaxDataServiceExample
             wrap.bulk = rcrdatabox;
             rcr.Value = wrap;
             dataservice.SetBulk(rcr);
-            ab = !ab;
+            
   
         }
         private void Browse(object sender, EventArgs e)
