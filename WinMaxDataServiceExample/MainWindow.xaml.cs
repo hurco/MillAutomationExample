@@ -141,7 +141,7 @@ namespace WinMaxDataServiceExample
 
           dataservice.ClientCredentials.UserName.UserName = "VendorID"; // your VendorID (1234)
           dataservice.ClientCredentials.UserName.Password = "Password";
-         // HeartbeatTimer = new Timer(PingWinmax, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
+          HeartbeatTimer = new Timer(PingWinmax, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
           try
           {
             notificationServiceClient.Open();
@@ -169,7 +169,7 @@ namespace WinMaxDataServiceExample
             {
                 if (notificationServiceClient != null)
                 {
-                    notificationServiceClient.GetSID("SID_RT_SERVO_POWER");
+                    notificationServiceClient.GetSID("SID_RT_SERVO_POWER");       
                 }
             }
             catch (Exception e)
