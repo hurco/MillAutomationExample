@@ -1,6 +1,7 @@
 Cycle Status:
-#define SID_RT_PROGRAM_RUNNING    1552211 // 0=no part program is running  1=part program is running 
-#define SID_RT_ALL_MOTION_STOPPED 1552035 // 0=one or more axes are moving 1=all axes are not moving
+
+SID_RT_PROGRAM_RUNNING     // 0=no part program is running,  1=part program is running 
+SID_RT_ALL_MOTION_STOPPED  // 0=one or more axes are moving, 1= all axes are not moving
 
 Alarm Status:
 This data exists but is not centralized in the system and therefore can’t be reported through a SID at this time
@@ -9,50 +10,58 @@ Alarm Codes:
 This data exists but is not centralized in the system and therefore can’t be reported through a SID at this time
 
 Part Counter:
-#define SID_RT_PART_COUNT  1568848 
 
-Program Number and Block Number:
-#define SID_WINMAX_RUN_PROGRAM_NAME                   5504  
-#define SID_WINMAX_RUN_PROGRAM_BLOCK_NUMBER 4053
+SID_RT_PART_COUNT
+
+Running Program Information:
+
+SID_WINMAX_RUN_PROGRAM_NAME
+SID_WINMAX_RUNNING_PROGRAM_PATH
+SID_WINMAX_RUN_PROGRAM_BLOCK_NUMBER
+SID_WINMAX_RUN_PROGRAM_TYPE
 
 Spindle Load:
+
 Not all machines report a spindle load, but if it exists it can be accessed through the SID below
-#define SID_RT_SPINDLE_LOAD   1584208
+SID_RT_SPINDLE_LOAD
 
 Comments:
 This data does not exist in the system
 
 Control Power:
-#define SID_RT_EMERGENCY_STOP        1552000 
-#define SID_RT_CONROL_POWER          1552001
-#define SID_RT_SERVO_POWER             1552002
+SID_RT_EMERGENCY_STOP
+SID_RT_CONROL_POWER
+SID_RT_SERVO_POWER         
 
 Spindle:
-#define SID_RT_SPINDLE_OVERRIDE_PERCENTAGE 1584000
-#define SID_RT_SPINDLE_TOOL_RPM                       1584064
+SID_RT_SPINDLE_OVERRIDE_PERCENTAGE
+SID_RT_SPINDLE_TOOL_RPM
 
 Feedrate:
-#define SID_RT_FEEDRATE_OVERRIDE_PERCENTAGE 1584032
-#define SID_RT_VECTOR_FEEDRATE                            1584080
+SID_RT_FEEDRATE_OVERRIDE_PERCENTAGE
+SID_RT_VECTOR_FEEDRATE
 
 Rapid:
-#define SID_RT_RAPID_OVERRIDE_PERCENTAGE    1584048
+SID_RT_RAPID_OVERRIDE_PERCENTAGE
 
 
 
 Status SIDs
 SID_CURRENT_PROGRAM_STATUS
-  PROGRAMSTATUS_UNINITIALIZED = 0,
-  PROGRAMSTATUS_STARTED = 1,
-  PROGRAMSTATUS_COMPLETED_SUCCESSFUL = 2,
-  PROGRAMSTATUS_COMPLETED_ERROR = 3,
-  PROGRAMSTATUS_COMPLETED_ABORT = 4
+valid values:
+  0 = not initialized / reset (state before run)
+  1 = running
+  2 = completed successfully
+  3 = completed with a program error
+  4 = aborted by user
 
 SID_RT_ALL_MODE_JOG_ENABLE 
-Values:	0 = Jogging can only occur during manual and manual setup modes
-		1 = Jogging can occur in any machine mode
+Valid Values:	
+0 = Jogging can only occur during manual and manual setup modes
+1 = Jogging can occur in any machine mode
 
-SID_RT_EMERGENCY_STOP
+
+SID_RT_CALIBRATED
 
 SID_RT_MACHINE_MODE_GET 
 Valid Values:	
@@ -64,10 +73,7 @@ Valid Values:
 5 = Auto Run Mode
 6 = Interrupt Cycle Mode
 
-SID_WINMAX_RUN_PROGRAM_BLOCK_NUMBER
-SID_WINMAX_RUN_PROGRAM_NAME
-SID_WINMAX_RUN_PROGRAM_TYPE
-SID_WINMAX_RUNNING_PROGRAM_PATH
+
 SID_RT_ACTIVE_PALLET_NUMBER
 
 
@@ -121,7 +127,7 @@ Valid Values:
 
 SID_RT_TOOL_IN_SPINDLE
  
-Tool in spindle Life
+Tool in spindle Life:
 SID_WINMAX_TOOL_LIFE_MONITORING_STATUS                   
 SID_WINMAX_TOOL_LIFE_EXCEEDED_POST_WARNING               
 SID_WINMAX_TOOL_LIFE_EXCEEDED_MARK_DEFECTIVE             

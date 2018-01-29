@@ -31,29 +31,30 @@ namespace WinMaxDataServiceExample
         {
             InitializeComponent();
             subscribedSids = new List<SidConstants.SID>
-                {
-            SidConstants.SID.SID_RT_LAMP_FEED_HOLD,
-            SidConstants.SID.SID_RT_TOOL_IN_SPINDLE,
-            //SidConstants.SID.SID_WINMAX_RUNNING_LOCAL_FEED,
-            SidConstants.SID.SID_RT_SPINDLE_OVERRIDE_POT,
-            SidConstants.SID.SID_RT_FEED_OVERRIDE_POT,
-            SidConstants.SID.SID_RT_RAPID_OVERRIDE_POT,
-           // SidConstants.SID.SID_RT_SPINDLE_SPEED,
-            SidConstants.SID.SID_RT_PROGRAM_RUNNING,
-            SidConstants.SID.SID_RT_PART_COUNT,
-            SidConstants.SID.SID_RT_SERVO_POWER,
-            SidConstants.SID.SID_RT_EMERGENCY_STOP,
-            SidConstants.SID.SID_WINMAX_MACHINE_MODE_CHANGED,
-            //SidConstants.SID.SID_WINMAX_NC_POUND_VARIABLE_NUMBER,
-            SidConstants.SID.SID_WINMAX_RUN_PROGRAM_NAME, 
-           // SidConstants.SID.SID_WINMAX_RUN_PROGRAM_BLOCK_NUMBER,
-            SidConstants.SID.SID_UI_BULK_LAST_NOTIFICATION,
-            //SidConstants.SID.SID_UI_BULK_MACHINE_POSITION,
-            //SidConstants.SID.SID_WCF_BULK_TOOL_DATA,
-            //SidConstants.SID.SID_UI_BULK_CURRENT_PART_SETUP
-            SidConstants.SID.SID_CURRENT_PROGRAM_STATUS,
-            SidConstants.SID.SID_RT_WAITING_ON_REMOTE_PROGRAM_START
-                };
+            {
+              SidConstants.SID.SID_RT_LAMP_FEED_HOLD,
+              SidConstants.SID.SID_RT_TOOL_IN_SPINDLE,
+              //SidConstants.SID.SID_WINMAX_RUNNING_LOCAL_FEED,
+              SidConstants.SID.SID_RT_SPINDLE_OVERRIDE_POT,
+              SidConstants.SID.SID_RT_FEED_OVERRIDE_POT,
+              SidConstants.SID.SID_RT_RAPID_OVERRIDE_POT,
+             // SidConstants.SID.SID_RT_SPINDLE_SPEED,
+              SidConstants.SID.SID_RT_PROGRAM_RUNNING,
+              SidConstants.SID.SID_RT_PART_COUNT,
+              SidConstants.SID.SID_RT_SERVO_POWER,
+              SidConstants.SID.SID_RT_EMERGENCY_STOP,
+              SidConstants.SID.SID_WINMAX_MACHINE_MODE_CHANGED,
+              //SidConstants.SID.SID_WINMAX_NC_POUND_VARIABLE_NUMBER,
+              SidConstants.SID.SID_WINMAX_RUN_PROGRAM_NAME, 
+             // SidConstants.SID.SID_WINMAX_RUN_PROGRAM_BLOCK_NUMBER,
+              SidConstants.SID.SID_UI_BULK_LAST_NOTIFICATION,
+              //SidConstants.SID.SID_UI_BULK_MACHINE_POSITION,
+              //SidConstants.SID.SID_WCF_BULK_TOOL_DATA,
+              //SidConstants.SID.SID_UI_BULK_CURRENT_PART_SETUP
+              SidConstants.SID.SID_CURRENT_PROGRAM_STATUS,
+              SidConstants.SID.SID_RT_WAITING_ON_REMOTE_PROGRAM_START,
+              SidConstants.SID.SID_RT_CALIBRATED
+            };
             MachineStatus = new MachineStatus();
             DataContext = this;
         }
@@ -194,8 +195,6 @@ namespace WinMaxDataServiceExample
           {
               double doubleValue;
               MessageBuffer.AppendFormat("The SID {0} has new value {1}\n", eventArgs.Sid, eventArgs.Value);
-
-
           }
           Dispatcher.Invoke(new Action(() => { Messages.Text = MessageBuffer.ToString(); }));
         }
@@ -243,6 +242,12 @@ namespace WinMaxDataServiceExample
         {
             Client.SetSID("SID_RT_START_CYCLE_BUTTON", 1.0);
         }
+		
+        private void StopCycle(object sender, EventArgs e)
+        {
+            Client.SetSID("SID_RT_STOP_CYCLE_BUTTON", 1.0);
+        }
+		
         private void LoadProgram(object sender, EventArgs e)
         {
             if (Program.Text.Trim() == "")
@@ -253,9 +258,9 @@ namespace WinMaxDataServiceExample
             rcrdata.sValue = new byte[200*5];
             rcrdata.dValue = new double[10];
 
-            rcrdata.dValue[0] = 0;
-            rcrdata.dValue[1] = 1;
-            rcrdata.dValue[2] = 0;
+            rcrdata.dValue[0] = 0; // close all other loaded programs (0 = no, 1 = yes)
+            rcrdata.dValue[1] = 1; // queue program to run after loading (0 = no, 1 = yes)
+            rcrdata.dValue[2] = 1; // skip reload if program is already loaded (0 = force reload, 1 = only load if not already loaded)
             rcrdata.dValue[3] = 0;
             rcrdata.dValue[4] = 0;
             rcrdata.dValue[5] = 0;

@@ -46,7 +46,10 @@
                 <Button VerticalAlignment="Center" Name="startbutton" Click="StartCycle" Background="Transparent"  Margin="10,0,10,0"  Focusable="False">
                     <Label Foreground="White" Content="Start Cycle"></Label>
             </Button>
-</StackPanel>
+            <Button VerticalAlignment="Center" Name="stopbutton" Click="StopCycle" Background="Transparent"  Margin="10,0,10,0"  Focusable="False">
+                    <Label Foreground="White" Content="Stop Cycle"></Label>
+            </Button>
+            </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="2" FlowDirection="LeftToRight" Orientation="Horizontal" Grid.ColumnSpan="3">
                 <TextBox HorizontalAlignment="Stretch" Margin="35,0,0,0" Width="150" Height="18" Name="Program" Text="{Binding ProgramPath}"></TextBox>
                
