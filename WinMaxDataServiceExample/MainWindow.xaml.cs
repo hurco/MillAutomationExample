@@ -105,9 +105,10 @@ namespace WinMaxDataServiceExample
               Messages.Text += "Invalid Machine Address entered.";
                 return;
             }
-
+            
             Client = new RestClient(ipAddress.ToString(), "VendorID", "Password"); //create local service
             Client.SidUpdated += this.OnNotificationReceived;
+            Client.ReUseConnections = true;
             ab = false;
            
        
@@ -233,7 +234,11 @@ namespace WinMaxDataServiceExample
             {
                 foreach (uint subscribedSid in subscribedSids)
                 {
-                    Client.Unsubscribe(subscribedSid.ToString());
+                    try
+                    {
+                        Client.Unsubscribe(subscribedSid.ToString());
+                    }
+                    catch { }
                 }
             }
         }
@@ -258,9 +263,15 @@ namespace WinMaxDataServiceExample
             rcrdata.sValue = new byte[200*5];
             rcrdata.dValue = new double[10];
 
+<<<<<<< HEAD
             rcrdata.dValue[0] = 0; // close all other loaded programs (0 = no, 1 = yes)
             rcrdata.dValue[1] = 1; // queue program to run after loading (0 = no, 1 = yes)
             rcrdata.dValue[2] = 1; // skip reload if program is already loaded (0 = force reload, 1 = only load if not already loaded)
+=======
+            rcrdata.dValue[0] = 0;
+            rcrdata.dValue[1] = 1;
+            rcrdata.dValue[2] = 1;
+>>>>>>> 7cab28d1da5a101b721b6e78e0d65a33b0c1e85c
             rcrdata.dValue[3] = 0;
             rcrdata.dValue[4] = 0;
             rcrdata.dValue[5] = 0;
