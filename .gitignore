@@ -250,3 +250,9 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+WinMaxDataServiceExample/bin/Release/WinMaxDataServiceExample.exe.config
+WinMaxDataServiceExample/obj/x86/Release/DesignTimeResolveAssemblyReferencesInput.cache
+WinMaxDataServiceExample/obj/x86/Release/TempPE/Service References.DataService.Reference.cs.dll
+WinMaxDataServiceExample/obj/x86/Release/TempPE/Service References.NotificationService.Reference.cs.dll
+WinMaxDataServiceExample/obj/x86/Release/WinMaxDataServiceExample.csproj.FileListAbsolute.txt
+WinMaxDataServiceExample/obj/x86/Release/WinMaxDataServiceExample_MarkupCompile.i.cache

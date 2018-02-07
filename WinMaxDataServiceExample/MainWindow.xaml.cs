@@ -57,6 +57,7 @@ namespace WinMaxDataServiceExample
             };
             MachineStatus = new MachineStatus();
             DataContext = this;
+            Closing += (s, a) => { if (Client != null) { Client.Shutdown(); HeartbeatTimer.Dispose(); } };
         }
         private Boolean AutoScroll = true;
 
@@ -121,6 +122,7 @@ namespace WinMaxDataServiceExample
           catch (Exception e)
           {
             Messages.Text += "Failed to Connect:\n" + e.Message + "\n" + e.StackTrace;
+                return;
           }
         }
         public Stream GenerateStreamFromString(string s)
@@ -140,7 +142,14 @@ namespace WinMaxDataServiceExample
             {
                 if (Client != null)
                 {
-                    Client.GetSID("SID_RT_SERVO_POWER");
+                    try
+                    {
+                        Client.GetSID("SID_RT_SERVO_POWER");
+                    }
+                    catch (TimeoutException err)
+                    {
+                        Dispatcher.BeginInvoke(new Action(() => { Messages.Text = "Timeout Exception " + err.Message; }));
+                    }
                 }
             }
             catch (Exception e)
@@ -215,7 +224,14 @@ namespace WinMaxDataServiceExample
               Client.BeginSubscribe();
                 foreach (SidConstants.SID subscribedSid in subscribedSids)
                 {
-                    Client.Subscribe(subscribedSid.ToString());
+                    try
+                    {
+                        Client.Subscribe(subscribedSid.ToString());
+                    }
+                    catch (TimeoutException err)
+                    {
+                        Messages.Text = "Timeout Exception " + err.Message;
+                    }
                 }
               Client.EndSubscribe();
             }
@@ -232,11 +248,15 @@ namespace WinMaxDataServiceExample
         {
             if (Client != null && Client.IsConnected == true)
             {
-                foreach (uint subscribedSid in subscribedSids)
+                foreach (SidConstants.SID subscribedSid in subscribedSids)
                 {
                     try
                     {
                         Client.Unsubscribe(subscribedSid.ToString());
+                    }
+                    catch (TimeoutException err)
+                    {
+                        Messages.Text = "Timeout Exception " + err.Message;
                     }
                     catch { }
                 }
@@ -245,12 +265,24 @@ namespace WinMaxDataServiceExample
 
         private void StartCycle(object sender, EventArgs e)
         {
-            Client.SetSID("SID_RT_START_CYCLE_BUTTON", 1.0);
+            try { 
+                Client.SetSID("SID_RT_START_CYCLE_BUTTON", 1.0);
+            }
+            catch (TimeoutException err)
+            {
+                Messages.Text = "Timeout Exception " + err.Message;
+            }
         }
 		
         private void StopCycle(object sender, EventArgs e)
         {
-            Client.SetSID("SID_RT_STOP_CYCLE_BUTTON", 1.0);
+            try {
+                Client.SetSID("SID_RT_STOP_CYCLE_BUTTON", 1.0);
+            }
+            catch (TimeoutException err)
+            {
+                Messages.Text = "Timeout Exception " + err.Message;
+            }
         }
 		
         private void LoadProgram(object sender, EventArgs e)
@@ -284,7 +316,14 @@ namespace WinMaxDataServiceExample
             rcrdatabox.BulkStruct = rcrdata;
             BulkWrapper wrap = new BulkWrapper();
             wrap.bulk = rcrdatabox;
-            Client.SetSID("SID_WINMAX_BULK_RCRID", wrap);
+            try
+            {
+                Client.SetSID("SID_WINMAX_BULK_RCRID", wrap);
+            }
+            catch(TimeoutException err)
+            {
+                Messages.Text = "Timeout Exception " + err.Message;
+            }
             ab = !ab;
   
         }
