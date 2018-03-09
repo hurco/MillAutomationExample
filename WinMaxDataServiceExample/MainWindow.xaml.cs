@@ -296,9 +296,9 @@ namespace WinMaxDataServiceExample
             rcrdata.dValue = new double[10];
       
             rcrdata.dValue[0] = 0; // close all other loaded programs (0 = no, 1 = yes)
-            rcrdata.dValue[1] = 1; // queue program to run after loading (0 = no, 1 = yes)
+            rcrdata.dValue[1] = 2; // queue program to run after loading (0 = no, 1 = yes, 2 = yes, no repeat)
             rcrdata.dValue[2] = 1; // skip reload if program is already loaded (0 = force reload, 1 = only load if not already loaded)
-
+            
             rcrdata.dValue[3] = 0;
             rcrdata.dValue[4] = 0;
             rcrdata.dValue[5] = 0;
