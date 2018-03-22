@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Format for a tool library backup file.  
+     Resulting XML file should be given a .TCM extension in order to be recognized by WinMax -->
+
+<xs:schema id="ToolSchema"
+           targetNamespace="urn:ToolSchema"
+           elementFormDefault="qualified"
+           xmlns="urn:ToolSchema"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+  <xs:element name="Hurco_Document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FileInfo"  minOccurs="0" type="xs:anyType"/>
+        <xs:element name="Tools" minOccurs="0" type="Tools"/>
+      </xs:sequence>
+      <xs:attribute name="Version" type="xs:string" fixed="1.1" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  
+  <xs:complexType name="Tools">
+    <xs:sequence>
+      <xs:element name="Tool" type="Tool" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+ 
+  
+  <xs:complexType name="Tool">
+  
+    <xs:sequence>
+        
+      <!-- 
+        String representation of tool type included when tool is saved by WinMax.
+        Listed for convenience when reading XML file only.
+      -->
+      <xs:element name="Tool.Name" type="xs:string" minOccurs="0"/>
+    
+    
+      <!-- Tool Types are stored by number.
+      BullNoseMill  =   0,
+      CenterDrill   =   1,
+      ChamferMill   =   2,
+      CornerRoundMill = 3,
+      CounterBore   =   4,
+      CounterSink   =   5,
+      DoveTail      =   6,
+      EngravingMill =   7,
+      KeyseatMill   =   8,
+      Ream          =   9,
+      Custom        =   10, // APT-7 tool with diameter, length, tip angle, side angle, corner radius
+      Drill         =   11,
+      CuttingTap    =   12,
+      BoringHead    =   13,          
+      EndMill       =   14,        
+      FaceMill      =   15,     
+      BallMill      =   16,    
+      BackSpotface  =   17,
+      Probe         =   18,           
+      GunDrill      =   19,      
+      SpotDrill     =   20,
+      FormingTap    =   21,
+      MultiCutterThreadMill  = 22,
+      TaperRadiusEndMill     = 23,
+      NewTool       = 24, // For internal use only.
+      UnknownTool   = 25, // default milling tool type, represented by diameter and length only
+      NoTools       = 25, // For internal use only.
+      SingleCutterThreadMill = 26,
+      Grooving      = 27,
+      Cutoff        = 28,
+      Turning       = 29,
+      BackTurning   = 30,
+      BarFeed       = 31,
+      // The distinction between fixed (stationary) drills used in turning mode and live/milling-mode drills is important.
+      FixedTurningDrill = 32,
+      FixedTurningTap = 33,
+      FixedTurningReam = 34,
+      FixedTurningCenterDrill = 35,
+      ThreadTurning = 36,
+      TurnBoring = 37,
+      TurnBackBoring = 38,
+      FixedTurningInsertedDrill = 39,
+      CustomTurning = 40, // Legacy default lathe tool type.
+      Broaching = 41
+      -->
+      <xs:element name="Tool.ToolType" minOccurs="1" default="24">
+        <xs:simpleType>
+          <xs:restriction base="xs:unsignedShort">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="41"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    
+
+      <xs:element name="Tool.Number" type="ToolNumber" minOccurs="1" default="1"/>
+    
+      <xs:element name="Tool.Diameter" type="xs:double" minOccurs="0" default="0.0"/>
+    
+      <!-- Represented on-screen as Diameter Wear.  The value is subtracted from the Diameter.
+           to get the adjusted diameter.  (Diameter - ImportedRadialWear = Effective Diameter) -->
+      <xs:element name="Tool.ImportRadialWear" type="xs:double" minOccurs="0" default="0.0"/>
+    
+      <!-- 
+         Distance from spindle gauge line to tool tip.  This is the relevant calibrated length. 
+      -->
+      <xs:element name="Tool.AbsoluteGaugeLength" type="xs:double" minOccurs="0" default="0.0"/>
+    
+      <!-- For tool life management.  Values are in minutes, based on time in running spindle. -->
+      <xs:element name="Tool.UsedTime" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.MaxUsedTime" type="xs:double" minOccurs="0" default="0.0"/>
+    
+      <!-- 0 = CW, 1 = CCW -->
+      <xs:element name="Tool.SpindleDirection" minOccurs="0" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:unsignedByte">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="1"/>
+          </xs:restriction>
+        </xs:simpleType>		  
+      </xs:element>
+    
+      <xs:element name="Tool.NumberOfFlutes" minOccurs="0" default="2">
+        <xs:simpleType>
+          <xs:restriction base="xs:unsignedByte">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="99"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      
+      <xs:element name="Tool.ThreadPitch" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.ThreadEngagement" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.LeftHandedThread" type="restrictedbool" minOccurs="0" default="0"/>
+
+      <!-- 0 = Straight, 1 = Spiral Point, 2 = Spiral Flute -->
+      <xs:element name="Tool.TapFluteType" minOccurs="0" default="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      
+      <!-- 0 = Taper, 1 = Plug, 2 = Bottoming, 3 = User Defined -->
+      <xs:element name="Tool.TapChamferType" minOccurs="0" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+
+      <xs:element name="Tool.Manufacturer" type="xs:string" minOccurs="0"/>
+      <xs:element name="Tool.OrderNo" type="xs:string" minOccurs="0"/>
+      <xs:element name="Tool.Comment" type="xs:string" minOccurs="0"/>  
+    
+      <!-- Settings used to represent tool model in graphics. -->
+      <!-- When set to 0, system can apply defaults internally based on ToolGeometryFlags.
+           ShankDiameter = Diameter
+           FluteLength = 5 x Diameter
+           ToolLength = 6 x Diameter - This value is only for graphics and is not a factor in the tool calibration.
+      -->
+      <xs:element name="Tool.ToolLength" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.FluteLength" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.ShankDiameter" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.Angle" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.InnerDiameter" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.TipDiameter" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.TipRadius" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.TipLength" type="xs:double" minOccurs="0" default="0.0"/>
+      <xs:element name="Tool.TipAngle" type="xs:double" minOccurs="0" default="0.0"/>
+   
+      <!--  Tool simulation colors
+            0 = sequential (each tool given the next color in the following sequence
+            1 = yellow
+            2 = orange
+            3 = violet
+            4 = green
+            5 = gray
+            6 = blue
+            7 = cyan
+            8 = magenta
+            9 = tan
+            10 = lime
+        -->
+      <xs:element name="Tool.SimulationColor" minOccurs="0" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:short">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      
+      <!-- Bitmask to control whether to calculate defaults as ratios of diameter.
+         1 (0x0001) = Shank Diameter Calculated - Equal to diameter.
+         2 (0x0002) = FluteLength Calculated - 5x diameter
+         3 (0x0004) = ToolLength Calculated - 6x diaemter
+         65535 (0xFFFF) = All flags Calculated			 
+      -->
+      <xs:element name="Tool.GeometryFlags" type="xs:unsignedInt" minOccurs="0" default="65535"/>
+    
+    
+      <!-- Default surface finish quality settings.  SelectSurface software option required. -->
+      <xs:element name="Tool.UseNcToolSFQ" type="restrictedbool" minOccurs="0" default="0" />
+
+      <xs:element name="Tool.NcToolSFQ" type="SurfaceFinishQuality" minOccurs="0" default="50" />
+    
+      <!-- 
+        Default speeds and feeds are applied to conversational data blocks when the tool is entered into
+          the block.  These values are not used in NC.
+      -->
+      <xs:element name="Tool.SpeedFeeds" type="OperationSpeedFeed" minOccurs="0" />
+        </xs:sequence>
+    
+      <xs:attribute name="Id" type="toolGUID" default=""/>
+
+    </xs:complexType>
+  
+    <xs:complexType name="OperationSpeedFeed">
+      <xs:sequence>
+        <xs:element name="SpeedFeed" type="SpeedFeed" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SpeedFeed">
+      <xs:sequence>
+        <xs:element name="SpeedFeed.SurfaceSpeed" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.Speed" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.Chipload" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.FeedPerRevolution" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.Feed" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.MaxDepthOfCut" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.PeckDepth" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.PeckMinDepth" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.DecreasingPeckAmount" type="xs:double" minOccurs="0" default="0"/>
+        <xs:element name="SpeedFeed.PlungeFeed" type="xs:double" minOccurs="0" default="0"/>
+    
+      <!-- 0 = off, 1 = primary, 2 = secondary, 3 = both -->
+      <xs:element name="SpeedFeed.Coolant" minOccurs="0" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:unsignedByte">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="3"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    
+      <!-- 0 = roughing, 1 = finishing -->
+      <xs:element name="SpeedFeed.Finishing" type="restrictedbool" minOccurs="0" default="0"/>
+    
+      <!-- Set Defined to 1 if the SpeedFeed object is in use for the operation in question. -->
+      <xs:element name="SpeedFeed.Defined" type="restrictedbool" minOccurs="0" default="0"/>
+    
+      <xs:element name="SpeedFeed.Flags" type="xs:unsignedInt" minOccurs="0" default="3"/>
+    
+      <xs:element name="SpeedFeed.SFQ" type="SurfaceFinishQuality" minOccurs="0" default="50" />
+      
+    </xs:sequence>
+  
+    <!-- Should match the GUID for the Tool's Id attribute -->
+    <xs:attribute name="ToolId" type="toolGUID" default=""/>
+    <!-- GUID format used for workpiece materials other than the default. -->
+    <xs:attribute name="MaterialId" type="materialGUID" default="unspecified"/>
+  
+  </xs:complexType>
+
+  
+  <!--bools in XMl can be 0 or 1 /true false our system only uses 0 an 1
+  so to be safe created a restricted type-->
+  <xs:simpleType name="restrictedbool">
+    <xs:restriction base="xs:short">
+      <xs:pattern value="0|1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- 
+       Use 1-9999 for tools in the machine's tool library.
+       50000-65535 reserved for unmatched tools (used in loaded conversational programs, but not in tool library)
+  -->
+  <xs:simpleType name="ToolNumber">
+    <xs:restriction base="xs:unsignedShort">
+      <xs:minInclusive value="1" />
+      <xs:maxInclusive value="65535" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- [8 characters]-[4 characters]-[4 characters]-[4 characters]-[12 characters]
+       
+       Empty string is also legal, but not recommended
+  -->
+  <xs:simpleType name="toolGUID">
+    <xs:restriction base="xs:string">
+    <xs:pattern value="|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+  </xs:restriction>
+  </xs:simpleType>
+
+  <!-- [8 characters]-[4 characters]-[4 characters]-[4 characters]-[12 characters]
+       'unspecified' for default material.
+       Empty string is also legal, but not recommended
+  -->
+  <xs:simpleType name="materialGUID">
+  <xs:restriction base="xs:string">
+    <xs:pattern value="|[Uu][Nn][Ss][Pp][Ee][Cc][Ii][Ff][Ii][Ee][Dd]|
+                        [0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+  </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Lower values favor cutting precision.  Higher values favor faster cutting. -->
+  <xs:simpleType name="SurfaceFinishQuality">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>
