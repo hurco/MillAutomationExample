@@ -111,7 +111,30 @@
       <!-- For tool life management.  Values are in minutes, based on time in running spindle. -->
       <xs:element name="Tool.UsedTime" type="xs:double" minOccurs="0" default="0.0"/>
       <xs:element name="Tool.MaxUsedTime" type="xs:double" minOccurs="0" default="0.0"/>
+	  
+	  <!-- 0 = Good
+	       1 = Length Defective
+		   2 = Diameter Defective
+		   3 = Defective (Bitwise OR of Length/Diameter Defective)
+		   4 = Max cutting time exceeded.
+		-->
+	  <xs:element name="Tool.Status" minOccurs="0" default="0">
+		<xs:simpleType>
+          <xs:restriction base="xs:unsignedShort">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="4"/>
+          </xs:restriction>
+        </xs:simpleType>
+	  </xs:element>
+	  
+	  <!-- 
+        Number of sister tool to switch to if original tool is marked defective.
+        Same rules as ToolNumber apply when setting value, except 0 is legal and means no sister tool.
+        Value also cannot match the tool number.
+      -->
+      <xs:element name="Tool.ImportSpareTool" type="xs:unsignedShort" minOccurs="0" default="0"/>
     
+	
       <!-- 0 = CW, 1 = CCW -->
       <xs:element name="Tool.SpindleDirection" minOccurs="0" default="0">
         <xs:simpleType>
