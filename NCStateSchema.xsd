@@ -30,6 +30,7 @@
 		<xs:element name="WorkOffsets" minOccurs="1" type="WorkOffsets"/>
 		<xs:element name="ToolOffsets" minOccurs="1" type="ToolOffsets"/>
 		<xs:element name="NCProgramVariables" minOccurs="1" type="NCProgramVariables"/>
+    		<xs:element name="NCVariableMappings" minOccurs="0" type="NCVariableMappings"/>
 		<xs:element name="NCSettings" minOccurs="0" type="NCSettings"/>
       </xs:sequence>
       <xs:attribute name="Version" type="xs:string" fixed="1.1" use="required"/>
@@ -169,7 +170,7 @@
 	  <xs:element name="V" type="xs:double" minOccurs="0"/>  <!-- mm -->
 	  <xs:element name="W" type="xs:double" minOccurs="0"/>  <!-- mm -->
 	  <xs:element name="Zone" type="xs:int" minOccurs="0" minInclusive="0" maxInclusive="2"/>    <!-- On multi-zone machines, 0 = current zone, 1 = zone 1, 2 = zone 2 -->
-	  <xs:element name="Skew" type="xs:double" minOccurs="0" minExclusive="-6.283185" maxExclusive"6.283185"/> <!-- radians -->
+	  <xs:element name="Skew" type="xs:double" minOccurs="0" minExclusive="-6.283185" maxExclusive="6.283185"/> <!-- radians -->
 	</xs:sequence>
   </xs:complexType>
   
@@ -233,6 +234,25 @@
 	  <xs:element name="NCVar###_type" type="xs:integer" minOccurs="0" default="2"/> <!-- 0 = data, 1 = invalid, 2 = vacant, 3 = null -->
 	  <xs:element name="NCVar###_value" type="xs:double" minOccurs="0"/>
 	</xs:sequence>
+  </xs:complexType>
+
+  <!-- NC VARIABLE MAPPINGS -->
+  <xs:complexType name="NCVariableMappings">
+    <!-- Supported only in version 10.02.79.11 or later. -->
+    <xs:sequence minOccurs="24" maxOccurs="32" >
+<!-- 
+      #### is a variable number between 1000-1015 union 1100-1115 inclusive, covering the range of NC variables 
+      reserved for mapping to machine IO. Entries not used are assumed by WinMax to be set to their default.
+-->
+      <xs:element name="Map####_Var" type="xs:unsignedInt" minOccurs="0" minInclusive="1000" maxInclusive="1115" default="####"/>
+<!-- 
+      The four #### represent the same variable number from the previous element. The long value uses an
+      internal reference SID that WinMax uses to determnine which machine IO point a variable is mapped to.
+      SIDs cover a wide range and differ depending on the version of WinMax. Check the documentation for
+      a list of machine IO SIDs for use with NC variable mappings.
+-->
+      <xs:element name="Map####_SID" type="xs:unsignedLong" minOccurs="0"/>
+    </xs:sequence>
   </xs:complexType>
   
  <!-- NC USER PREFERENCES -->
