@@ -239,17 +239,18 @@
   <!-- NC VARIABLE MAPPINGS -->
   <xs:complexType name="NCVariableMappings">
     <!-- Supported only in version 10.02.79.11 or later. -->
-    <xs:sequence minOccurs="24" maxOccurs="32" >
+    <xs:sequence minOccurs="0" maxOccurs="32" >
 <!-- 
       #### is a variable number between 1000-1015 union 1100-1115 inclusive, covering the range of NC variables 
       reserved for mapping to machine IO. Entries not used are assumed by WinMax to be set to their default.
+      The value of the Map####_Var element should be the same value used in the name ####.
 -->
-      <xs:element name="Map####_Var" type="xs:unsignedInt" minOccurs="0" minInclusive="1000" maxInclusive="1115" default="####"/>
+      <xs:element name="Map####_Var" type="xs:unsignedInt" minOccurs="0" minInclusive="1000" maxInclusive="1115"/>
 <!-- 
       The four #### represent the same variable number from the previous element. The long value uses an
       internal reference SID that WinMax uses to determnine which machine IO point a variable is mapped to.
       SIDs cover a wide range and differ depending on the version of WinMax. Check the documentation for
-      a list of machine IO SIDs for use with NC variable mappings.
+      a list of machine IO SIDs for use with NC variable mappings on your machine.
 -->
       <xs:element name="Map####_SID" type="xs:unsignedLong" minOccurs="0"/>
     </xs:sequence>
