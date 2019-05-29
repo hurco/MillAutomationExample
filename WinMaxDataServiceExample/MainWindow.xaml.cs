@@ -12,9 +12,10 @@ using System.ServiceModel.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using WinMaxDataServiceExample.DataService;
-using WinMaxDataServiceExample.NotificationService;
 using System.Threading;
+using RESTclient;
+using WcfDataService;
+using WcfDataServices;
 
 namespace WinMaxDataServiceExample
 {
@@ -56,6 +57,7 @@ namespace WinMaxDataServiceExample
             };
             MachineStatus = new MachineStatus();
             DataContext = this;
+            Closing += (s, a) => { if (Client != null) { Client.Shutdown(); HeartbeatTimer.Dispose(); } };
         }
         private Boolean AutoScroll = true;
 
@@ -85,8 +87,7 @@ namespace WinMaxDataServiceExample
         }
 
         private readonly List<SidConstants.SID> subscribedSids;
-        private NotificationServiceClient notificationServiceClient;
-        private DataServiceClient dataservice;
+        private RestClient Client;
         /// <summary>
         /// The machine status.
         /// </summary>
@@ -105,52 +106,23 @@ namespace WinMaxDataServiceExample
               Messages.Text += "Invalid Machine Address entered.";
                 return;
             }
-            var callbackClass = new NotificationServiceCallback();
-            callbackClass.NotificationReceived += OnNotificationReceived;
-            var notificationServiceBinding = new NetTcpBinding(SecurityMode.Message);
             
-            notificationServiceBinding.ReceiveTimeout = TimeSpan.FromSeconds(10);
-            notificationServiceBinding.SendTimeout = TimeSpan.FromSeconds(10);
-            
-            AddressHeader header = AddressHeader.CreateAddressHeader("machine-connect", "hurco.com", "machine-connect");
-            EndpointAddressBuilder builder = new EndpointAddressBuilder(new EndpointAddress("net.tcp://" + ipAddress + "/NotificationService"));
-            builder.Headers.Add(header);
-            builder.Identity = EndpointIdentity.CreateDnsIdentity("machine-connect.hurco.com");
-
-            EndpointAddressBuilder builder2 = new EndpointAddressBuilder(new EndpointAddress("net.tcp://" + ipAddress + ":4502/DataServicetcp"));
-            builder2.Headers.Add(header);
-            builder2.Identity = EndpointIdentity.CreateDnsIdentity("machine-connect.hurco.com");
-
-            notificationServiceClient = new NotificationServiceClient(new InstanceContext(callbackClass), notificationServiceBinding, builder.ToEndpointAddress()); //create local service
-            dataservice = new DataServiceClient(notificationServiceBinding, builder2.ToEndpointAddress());
-
+            Client = new RestClient(ipAddress.ToString(), "VendorID", "Password"); //create local service
+            Client.SidUpdated += this.OnNotificationReceived;
+            Client.ReUseConnections = true;
             ab = false;
-            if (notificationServiceClient.ClientCredentials == null)
-            {
-              Messages.Text += "Invalid client. Please try again.";
-                return;
-            }
-         
-          ////turn on security
-          notificationServiceBinding.Security.Mode= SecurityMode.Message;
-          notificationServiceBinding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
-          ///turn on security
+           
+       
 
-        
-          notificationServiceClient.ClientCredentials.UserName.UserName = "VendorID"; // your VendorID (1234)
-          notificationServiceClient.ClientCredentials.UserName.Password = "Password";
-
-          dataservice.ClientCredentials.UserName.UserName = "VendorID"; // your VendorID (1234)
-          dataservice.ClientCredentials.UserName.Password = "Password";
           HeartbeatTimer = new Timer(PingWinmax, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
           try
           {
-            notificationServiceClient.Open();
-            dataservice.Open();
+              Client.Connect();
           }
           catch (Exception e)
           {
             Messages.Text += "Failed to Connect:\n" + e.Message + "\n" + e.StackTrace;
+                return;
           }
         }
         public Stream GenerateStreamFromString(string s)
@@ -168,9 +140,16 @@ namespace WinMaxDataServiceExample
         {
             try
             {
-                if (notificationServiceClient != null)
+                if (Client != null)
                 {
-                    notificationServiceClient.GetSID("SID_RT_SERVO_POWER");       
+                    try
+                    {
+                        Client.GetSID("SID_RT_SERVO_POWER");
+                    }
+                    catch (TimeoutException err)
+                    {
+                        Dispatcher.BeginInvoke(new Action(() => { Messages.Text = "Timeout Exception " + err.Message; }));
+                    }
                 }
             }
             catch (Exception e)
@@ -190,9 +169,10 @@ namespace WinMaxDataServiceExample
         /// <param name="eventArgs">Event arguments.</param>
         /// 
         /// 
-        private void OnNotificationReceived(object sender, NotificationReceivedEventArgs eventArgs)
+        private void OnNotificationReceived(object sender, SIDUpdate update)
         {
           MessageBuffer.Clear();
+          NotificationReceivedEventArgs eventArgs = new NotificationReceivedEventArgs(update.SID, update.SIDValue); //convert to our type;
           if (eventArgs.Sid == SidConstants.SID.SID_UI_BULK_MACHINE_POSITION)
           {
             var s = new DataContractJsonSerializer(typeof(MachinePosition));
@@ -208,7 +188,7 @@ namespace WinMaxDataServiceExample
               double.TryParse(eventArgs.Value, out val);
               if (val > 1 && val <3) //completed success
               {
-                  Dispatcher.BeginInvoke(new Action(() => { Thread.Sleep(1000); LoadProgram(this, null); }));
+                  Dispatcher.BeginInvoke(new Action(() => {  Thread.Sleep(1000); LoadProgram(this, null); }));
               }
           }
           else if (eventArgs.Sid == SidConstants.SID.SID_RT_WAITING_ON_REMOTE_PROGRAM_START)
@@ -226,7 +206,7 @@ namespace WinMaxDataServiceExample
               double doubleValue;
               MessageBuffer.AppendFormat("The SID {0} has new value {1}\n", eventArgs.Sid, eventArgs.Value);
           }
-          Messages.Text = MessageBuffer.ToString();
+          Dispatcher.Invoke(new Action(() => { Messages.Text = MessageBuffer.ToString(); }));
         }
 
 
@@ -241,12 +221,19 @@ namespace WinMaxDataServiceExample
             {
                 UnsubscribeSidsIfNeeded();
                 InitializeClient(Address.Text);
-              notificationServiceClient.BeginSubscribe();
+              Client.BeginSubscribe();
                 foreach (SidConstants.SID subscribedSid in subscribedSids)
                 {
-                    notificationServiceClient.Subscribe(subscribedSid.ToString());
+                    try
+                    {
+                        Client.Subscribe(subscribedSid.ToString());
+                    }
+                    catch (TimeoutException err)
+                    {
+                        Messages.Text = "Timeout Exception " + err.Message;
+                    }
                 }
-              notificationServiceClient.EndSubscribe();
+              Client.EndSubscribe();
             }
             catch (Exception ex)
             {
@@ -259,11 +246,19 @@ namespace WinMaxDataServiceExample
         /// </summary>
         private void UnsubscribeSidsIfNeeded()
         {
-            if (notificationServiceClient != null && notificationServiceClient.State == CommunicationState.Opened)
+            if (Client != null && Client.IsConnected == true)
             {
-                foreach (uint subscribedSid in subscribedSids)
+                foreach (SidConstants.SID subscribedSid in subscribedSids)
                 {
-                    notificationServiceClient.Unsubscribe(subscribedSid.ToString());
+                    try
+                    {
+                        Client.Unsubscribe(subscribedSid.ToString());
+                    }
+                    catch (TimeoutException err)
+                    {
+                        Messages.Text = "Timeout Exception " + err.Message;
+                    }
+                    catch { }
                 }
             }
         }
@@ -271,30 +266,43 @@ namespace WinMaxDataServiceExample
 
         private void StartCycle(object sender, EventArgs e)
         {
-            dataservice.SetDoubleSID("SID_RT_START_CYCLE_BUTTON", 1);
+            try { 
+                Client.SetSID("SID_RT_START_CYCLE_BUTTON", 1.0);
+            }
+            catch (TimeoutException err)
+            {
+                Messages.Text = "Timeout Exception " + err.Message;
+            }
         }
 		
         private void StopCycle(object sender, EventArgs e)
         {
-            dataservice.SetDoubleSID("SID_RT_STOP_CYCLE_BUTTON", 1);
+            try {
+                Client.SetSID("SID_RT_STOP_CYCLE_BUTTON", 1.0);
+            }
+            catch (TimeoutException err)
+            {
+                Messages.Text = "Timeout Exception " + err.Message;
+            }
         }
 		
         private void LoadProgram(object sender, EventArgs e)
         {
             if (Program.Text.Trim() == "")
             { return; }
-            SetBulkParams rcr = new SetBulkParams();
-            rcr.SID="SID_WINMAX_BULK_RCRID";
-            DataService.BulkRemoteCommandDataTypeBox rcrdatabox = new DataService.BulkRemoteCommandDataTypeBox();
-            DataService.UnmanagedDataTypesRemoteCommandInfoType rcrdata = new DataService.UnmanagedDataTypesRemoteCommandInfoType();
+            BulkRemoteCommandDataTypeBox rcrdatabox = new BulkRemoteCommandDataTypeBox();
+            UnmanagedDataTypes.RemoteCommandInfoType rcrdata = new UnmanagedDataTypes.RemoteCommandInfoType();
             rcrdata.dwCmdId = 42; // LOAD PROGRAM
             rcrdata.sValue = new byte[200*5];
             rcrdata.dValue = new double[10];
-            if (ab && count >1)
+      
             rcrdata.dValue[0] = 0; // close all other loaded programs (0 = no, 1 = yes)
-            rcrdata.dValue[1] = 1; // queue program to run after loading (0 = no, 1 = yes)
+            rcrdata.dValue[1] = 2; // queue program to run after loading (0 = no, 1 = yes, 2 = yes, no repeat)
             rcrdata.dValue[2] = 1; // skip reload if program is already loaded (0 = force reload, 1 = only load if not already loaded)
-
+            
+            rcrdata.dValue[3] = 0;
+            rcrdata.dValue[4] = 0;
+            rcrdata.dValue[5] = 0;
             if (ab)
             {
                 count = 0;
@@ -311,11 +319,17 @@ namespace WinMaxDataServiceExample
             }
            // Array.Copy(pathdata, 0, rcrdata.sValue, 0, Math.Min(200,pathdata.Length));
             rcrdatabox.BulkStruct = rcrdata;
-            DataService.BulkWrapper wrap = new DataService.BulkWrapper();
+            BulkWrapper wrap = new BulkWrapper();
             wrap.bulk = rcrdatabox;
-            rcr.Value = wrap;
-            dataservice.SetBulk(rcr);
-            
+            try
+            {
+                Client.SetSID("SID_WINMAX_BULK_RCRID", wrap);
+            }
+            catch(TimeoutException err)
+            {
+                Messages.Text = "Timeout Exception " + err.Message;
+            }
+            ab = !ab;
   
         }
         private void Browse(object sender, EventArgs e)

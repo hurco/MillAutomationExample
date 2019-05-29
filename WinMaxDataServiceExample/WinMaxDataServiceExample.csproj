@@ -40,20 +40,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Service References\DataService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\NotificationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="SidConstants.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="MachineStatus.cs" />
-    <Compile Include="NotificationServiceCallback.cs" />
     <Compile Include="NotificationReceivedEventArgs.cs" />
     <Compile Include="NotificationReceivedEventHandler.cs" />
     <Page Include="MainWindow.xaml">
@@ -96,51 +85,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\DataService\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataService\Message.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataService\service.wsdl" />
-    <None Include="Service References\DataService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataService\WcfDataServices.wsdl" />
-    <None Include="Service References\DataService\WcfDataServices.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataService\WcfDataServices1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataService\WinMaxDataServiceExample.DataService.BulkWrapper.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\DataService\WinMaxDataServiceExample.DataService.SIDValue.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\NotificationService\05.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\NotificationService\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\NotificationService\service.wsdl" />
-    <None Include="Service References\NotificationService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\NotificationService\WcfDataServices.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\NotificationService\WcfDataServices1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\NotificationService\WinMaxDataServiceExample.NotificationService.BulkWrapper.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\NotificationService\WinMaxDataServiceExample.NotificationService.SIDValue.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -148,6 +92,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="RESTclient">
+      <HintPath>..\RESTclient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -160,35 +107,6 @@
     <Resource Include="Resources\onIcon.png" />
     <Resource Include="Resources\SubscribeButton.png" />
     <Resource Include="Resources\SubscribeButtonDown.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\DataService\" />
-    <WCFMetadataStorage Include="Service References\NotificationService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\NotificationService\05.wsdl" />
-    <None Include="Service References\NotificationService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\NotificationService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\NotificationService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DataService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DataService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DataService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
