@@ -30,7 +30,8 @@ namespace WinMaxDataServiceExample
         SID_WCF_BULK_TOOL_DATA,
         SID_UI_BULK_CURRENT_PART_SETUP,
         SID_CURRENT_PROGRAM_STATUS,
-        SID_RT_WAITING_ON_REMOTE_PROGRAM_START
+        SID_RT_WAITING_ON_REMOTE_PROGRAM_START,
+        SID_RT_CALIBRATED
       }
     }
   [DataContract]
