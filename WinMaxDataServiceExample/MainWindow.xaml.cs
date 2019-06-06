@@ -106,7 +106,7 @@ namespace WinMaxDataServiceExample
               Messages.Text += "Invalid Machine Address entered.";
                 return;
             }
-            
+
             Client = new RestClient(ipAddress.ToString(), "VendorID", "Password"); //create local service
             Client.SidUpdated += this.OnNotificationReceived;
             Client.ReUseConnections = true;
@@ -117,7 +117,15 @@ namespace WinMaxDataServiceExample
           HeartbeatTimer = new Timer(PingWinmax, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
           try
           {
-              Client.Connect();
+              Guid new_token;
+              if(Token.Text.Length >0 && Guid.TryParse(Token.Text,out new_token))
+              {
+                  Client.ResumeConnection(new_token);
+              }
+              else{  
+                  Client.Connect();
+                  Token.Text = Client.Token;
+              }
           }
           catch (Exception e)
           {
@@ -125,6 +133,7 @@ namespace WinMaxDataServiceExample
                 return;
           }
         }
+
         public Stream GenerateStreamFromString(string s)
         {
           MemoryStream stream = new MemoryStream();
@@ -353,6 +362,7 @@ namespace WinMaxDataServiceExample
                 Program.Text = filename;
             }
         }
+
        
     }
 }
