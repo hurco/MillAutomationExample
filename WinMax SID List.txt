@@ -167,6 +167,15 @@ Valid Values:
 6 = Interrupt Cycle Mode
 
 
+AUTOMATION_AVAILABLE
+0=local control
+1=remote control
+
+AUTOMATION_COUNTER
+
+OPTIONAL_STOP
+
+
 -----
 
 SIDs stored as STRING data types
