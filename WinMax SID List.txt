@@ -74,15 +74,21 @@ valid values:
 
 
 SID_RT_STATUS_PROGRAM_RUN_SUSPEND_STATE
-Description:  Program run stopped, waiting for start cycle event to resume.
-Minimum supported software release: WinMax Mill 10.3.1
+Alias:
+  PROGRAM_RUN_SUSPEND_STATE
+Description:  
+  Program run stopped, waiting for start cycle event to resume.
+Minimum supported software release: 
+  WinMax Mill 10.3.2
+  WinMax Lathe 11.3.3
 Valid Values:
-0 = Not active (Not in a suspended state during a program run. Always in this state when not running a program.)
-1 = Single Cycle
-2 = M0 Program Stop
-3 = M1 Optional Stop
-4 = Interrupted
-5 = Spindle Zero Warning
+  0 = Not active (Not in a suspended state during a program run. Always in this state when not running a program.)
+  1 = Single Cycle
+  2 = M0 Program Stop
+  3 = M1 Optional Stop
+  4 = Interrupted
+  5 = Spindle Zero Warning  (v10 Mill Only)
+
 
 SID_RT_ALL_MODE_JOG_ENABLE 
 Valid Values:	
